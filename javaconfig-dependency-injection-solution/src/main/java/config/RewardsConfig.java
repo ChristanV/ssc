@@ -15,6 +15,9 @@ import rewards.internal.restaurant.RestaurantRepository;
 import rewards.internal.reward.JdbcRewardRepository;
 import rewards.internal.reward.RewardRepository;
 
+/**
+ * Configuration for rewards
+ */
 @Configuration
 public class RewardsConfig {
 

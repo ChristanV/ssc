@@ -16,7 +16,6 @@ import rewards.internal.reward.RewardRepository;
 /**
  *  @author Christan
  *  Setup configuration for each reposistory with a datasource
- *
  */
 @Configuration
 public class RewardsConfig {

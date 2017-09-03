@@ -7,9 +7,13 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Repository;
 
 import common.money.Percentage;
 
@@ -21,17 +25,11 @@ import common.money.Percentage;
  */
 
 
-/* TODO-06: Annotate the class with an appropriate stereotype annotation 
- * to cause component-scan to detect and load this bean.
- * Configure Dependency Injection for dataSource.  
- * Use constructor injection in this case 
- * (note the logic in the constructor requires a dataSource).  
+/**
+ * @Author Christan
+ * Added appropriate stereotype annotations
  */
-
-/* TODO-08: Experiment with setting the dataSource property using either setter or field injection. 
- * Re-run the test. It should fail. Examine the stack trace and see if you can understand why. 
- * (If not, refer to the detailed lab instructions). We will fix this error in the next step." */
-
+@Repository
 public class JdbcRestaurantRepository implements RestaurantRepository {
 
 	private DataSource dataSource;
@@ -56,9 +54,11 @@ public class JdbcRestaurantRepository implements RestaurantRepository {
 	
 	public JdbcRestaurantRepository(){}
 	
+	@Autowired
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}
+
 
 	public Restaurant findByMerchantNumber(String merchantNumber) {
 	  	   return queryRestaurantCache(merchantNumber);
@@ -68,12 +68,7 @@ public class JdbcRestaurantRepository implements RestaurantRepository {
 	 * Helper method that populates the {@link #restaurantCache restaurant object cache} from rows in the T_RESTAURANT
 	 * table. Cached restaurants are indexed by their merchant numbers. This method should be called on initialization.
 	 */
-	
-	
-	/* TODO-09: Mark this method with an annotation that will cause it to be executed by
-	 * Spring after constructor / setter initialization has occurred.
-	 * Re-run the RewardNetworkTests test. You should see the test succeed */
-	
+	@PostConstruct
 	void populateRestaurantCache() {
 		restaurantCache = new HashMap<String, Restaurant>();
 		String sql = "select MERCHANT_NUMBER, NAME, BENEFIT_PERCENTAGE from T_RESTAURANT";
@@ -134,12 +129,8 @@ public class JdbcRestaurantRepository implements RestaurantRepository {
 	/**
 	 * Helper method that clears the cache of restaurants.  This method should be called on destruction
 	 */
-	
-	/* TODO-10: Add a breakpoint inside clearRestaurantCache(). Re-run RewardNetworkTests in debug mode. 
-	 * It seems that this method is never called. Use an annotation to register this method for a 
-	 * destruction lifecycle callback. Re-run the test and the breakpoint should now be reached.  */
-	
-	public 	void clearRestaurantCache() {
+	@PreDestroy
+	void clearRestaurantCache() {
 		restaurantCache.clear();
 	}
 

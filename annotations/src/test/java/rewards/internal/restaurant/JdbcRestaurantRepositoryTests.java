@@ -37,7 +37,10 @@ public class JdbcRestaurantRepositoryTests {
 
 		// simulate the Spring bean initialization lifecycle:
 		// first, construct the bean
-		repository = new JdbcRestaurantRepository(createTestDataSource());
+		repository = new JdbcRestaurantRepository();
+
+		// then, inject its dependencies
+		repository.setDataSource(createTestDataSource());
 
 		// lastly, initialize the bean
 		repository.populateRestaurantCache();

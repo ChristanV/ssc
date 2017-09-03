@@ -6,18 +6,13 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.boot.SpringApplication;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 
 import common.money.MonetaryAmount;
-import config.RewardsConfig;
 
 /**
  * A system test that verifies the components of the RewardNetwork application work together to reward for dining
  * successfully. Uses Spring to bootstrap the application for use in a test environment.
- *
- * TODO-01: Run this test before making any changes.  It should pass.
  */
 public class RewardNetworkTests  {
 
@@ -25,15 +20,15 @@ public class RewardNetworkTests  {
 	 * The object being tested.
 	 */
 	private RewardNetwork rewardNetwork;
-	
+	private ConfigurableApplicationContext context;
+
 	@Before
 	public void setUp() {
 		// Create the test configuration for the application from two classes:
-		ApplicationContext context = SpringApplication.run(TestInfrastructureConfig.class);
+		context = SpringApplication.run(TestInfrastructureConfig.class);
 
 		// Get the bean to use to invoke the application
 		rewardNetwork = context.getBean(RewardNetwork.class);
-
 	}
 	
 

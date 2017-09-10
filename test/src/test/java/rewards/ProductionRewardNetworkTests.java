@@ -1,8 +1,8 @@
 package rewards;
 
+import common.money.MonetaryAmount;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,21 +10,10 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import common.money.MonetaryAmount;
-
-/**
- * A system test that verifies the components of the RewardNetwork application
- * work together to reward for dining successfully. Uses Spring to bootstrap the
- * application for use in a test environment.
- */
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes=TestInfrastructureConfig.class)
-
-// Uncomment the profile you wish to use
-@ActiveProfiles("stub")
-//@ActiveProfiles({ "dev", "jdbc" })
-//@ActiveProfiles({ "production", "jdbc" })
-public class RewardNetworkTests {
+@ActiveProfiles({ "jdbc-production", "jdbc" })
+public class ProductionRewardNetworkTests {
 
 	/**
 	 * The object being tested.

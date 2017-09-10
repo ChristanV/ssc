@@ -60,26 +60,15 @@ public class RewardNetworkTests {
 		// each distribution should be 4.00 (as both have a 50% allocation)
 		assertEquals(MonetaryAmount.valueOf("4.00"), contribution.getDistribution("Annabelle").getAmount());
 		assertEquals(MonetaryAmount.valueOf("4.00"), contribution.getDistribution("Corgan").getAmount());
-		
-		// TODO-06: Run this test. It should pass AND you should see TWO lines of
-		// log output from the LoggingAspect on the console
-		int expectedMatches = 2;
-		checkConsoleOutput(expectedMatches);
-		
-		// TODO-09: Save all your work, and change the expected matches value above from 2 to 4.
-		// Rerun the RewardNetworkTests.  It should pass, and you should now see FOUR lines of
-		// console output from the LoggingAspect.
+
+		checkConsoleOutput(4);
 	}
-	
+
 	/**
 	 * Not only must the code run, but the LoggingAspect should generate logging
 	 * output to the console.
 	 */
 	private void checkConsoleOutput(int expectedMatches) {
-		// No console output until we implement the LoggingAspect
-		if (!TestConstants.CHECK_CONSOLE_OUTPUT)
-			return;
-		
 		// AOP VERIFICATION
 		// Expecting 4 lines of output from the LoggingAspect to console
 		String[] consoleOutput = capture.toString().split("\n");

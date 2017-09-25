@@ -78,7 +78,7 @@ public class JdbcRewardRepositoryTests {
 
 	private int getRewardCount() throws SQLException {
 		String sql = "select count(*) from T_REWARD";
-		return jdbcTemplate.queryForObject(sql,Integer.class);
+		return jdbcTemplate.queryForObject(sql, Integer.class);
 	}
 
 	private DataSource createTestDataSource() {

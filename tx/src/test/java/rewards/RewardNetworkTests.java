@@ -47,7 +47,6 @@ public class RewardNetworkTests {
 		Logger jdbcLogger = (Logger) LoggerFactory
 				.getLogger("org.springframework.jdbc.datasource.DataSourceTransactionManager");
 		jdbcLogger.setLevel(Level.DEBUG);
-
 	}
 
 	@Test

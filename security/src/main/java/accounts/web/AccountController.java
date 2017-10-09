@@ -29,8 +29,8 @@ import accounts.AccountManager;
  * <li>No repository layer is being used - the account-manager does everything</li>
  */
 @Controller
-@RequestMapping("/accounts")
 @SessionAttributes("account")
+@RequestMapping("/accounts")
 public class AccountController {
 	private AccountManager accountManager;
 
@@ -50,11 +50,6 @@ public class AccountController {
 		model.addAttribute("account", accountManager.getAccount(entityId));
 		return "accountDetails";
 	}
-	
-	@RequestMapping("/hidden")
-	public String hidden() {
-		return "hidden";
-	}
 
 	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	// The next 4 methods enable form handling so that beneficiaries can
@@ -65,17 +60,16 @@ public class AccountController {
 
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
-		binder.setRequiredFields(new String[] { "number", "name" });
+	    binder.setRequiredFields(new String[] {"number", "name"});
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/editAccount")
+	@RequestMapping(method=RequestMethod.GET, value="/editAccount")
 	public String getEditAccount(Long entityId, Model model) {
 		model.addAttribute("account", accountManager.getAccount(entityId));
 		return "editAccount";
-
 	}
 
-	@RequestMapping(method = RequestMethod.POST, value = "/editAccount")
+	@RequestMapping(method=RequestMethod.POST, value="/editAccount")
 	public String postEditAccount(Account account, BindingResult bindingResult, SessionStatus status) {
 		validateAccount(account, bindingResult);
 		if (bindingResult.hasErrors()) {
@@ -83,17 +77,16 @@ public class AccountController {
 		}
 		accountManager.update(account);
 		status.setComplete();
-		return "redirect:/accounts/accountDetails?entityId="
-				+ account.getEntityId();
+		return "redirect:/accounts/accountDetails?entityId=" + account.getEntityId();
 	}
 
-	public void validateAccount(Account account, Errors errors) {
-		if (!StringUtils.hasText(account.getNumber())) {
-			errors.rejectValue("number", "empty.value");
-		}
-		if (!StringUtils.hasText(account.getName())) {
-			errors.rejectValue("name", "empty.value");
-		}
-	}
+    void validateAccount(Account account, Errors errors) {
+    	if (!StringUtils.hasText(account.getNumber())) {
+    		errors.rejectValue("number", "empty.value");
+    	}
+       	if (!StringUtils.hasText(account.getName())) {
+    		errors.rejectValue("name", "empty.value");
+    	}
+    }
 
 }

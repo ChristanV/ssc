@@ -144,8 +144,7 @@ public abstract class AbstractAccountControllerTests {
 		account.setName("");
 		account.setNumber("");
 		BindingResult br = new MapBindingResult(model, "account");
-		String viewName = controller.postEditAccount(account, br,
-				new SimpleSessionStatus());
+		String viewName = controller.postEditAccount(account, br, new SimpleSessionStatus());
 		assertEquals("Invalid Post has not returned to correct view",
 				"editAccount", viewName);
 	}

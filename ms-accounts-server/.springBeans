@@ -9,6 +9,7 @@
 	<configs>
 	</configs>
 	<autoconfigs>
+		<config>java:microservices.accounts.AccountsMicroservice</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>
